@@ -1,0 +1,76 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "G++ Build",
+            "type": "shell",
+            "problemMatcher": "$gcc",
+            "command": "g++",
+            "args": [
+                "-std=c++23",
+                "-g",
+                "${cwd}/src/main.cpp",
+                "-o",
+                "${cwd}/bin/theme-scheme",
+            ],
+            "presentation": {
+                "panel": "new",
+                "clear": true,
+                "close": true,
+                "reveal": "silent",
+                "showReuseMessage": false,
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "G++ Test",
+            "type": "shell",
+            "problemMatcher": "$gcc",
+            "command": "${cwd}/bin/theme-scheme",
+            "args": [],
+            "presentation": {
+                "focus": true,
+                "revealProblems": "onProblem",
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "",
+            "type": "shell",
+            "command": "${cwd}/bin/theme-scheme",
+            "args": [
+                "${input:cmd-func}",
+                "${input:arg}"
+            ]
+        }
+    ],
+    "options": {
+        "cwd": "${workspaceFolder}"
+    },
+    "inputs": [
+        {
+            "id": "cmd-func",
+            "description": "Choose one of the CLI's command functions from the list below.",
+            "type": "pickString",
+            "options": [
+                "foo",
+                "bar",
+                "qux",
+                "zuan"
+            ],
+            "default": "Foo"
+        },
+        {
+            "id": "arg",
+            "type": "promptString",
+            "description": "Choose an argument to pass into the command function",
+            "default": "foobar"
+        }
+    ]
+}
