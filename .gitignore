@@ -1,6 +1,0 @@
-# Entire Dirs
-bin/*
-node_modules/*
-
-# Specific Files
-.vscode/settings.json
