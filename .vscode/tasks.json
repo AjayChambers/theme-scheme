@@ -1,8 +1,9 @@
 {
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "G++ Build",
+        { // BUILD: Compile C++ source code
+            "label": "G++ > BUILD",
+            "detail": "Compile C++ source code with G++",
             "type": "shell",
             "problemMatcher": "$gcc",
             "command": "g++",
@@ -25,52 +26,54 @@
                 "isDefault": true
             },
         },
-        {
-            "label": "G++ Test",
+        { // RUN TEST: Use prompt to choose cmd & arg
+            "label": "SHELL > RUN TEST w/ CMD-PROMPT",
+            "detail": "Run project's binary. Cmd & arg are set using a pop-up prompt.",
             "type": "shell",
-            "problemMatcher": "$gcc",
-            "command": "${cwd}/bin/theme-scheme",
-            "args": [],
-            "presentation": {
-                "focus": true,
-                "revealProblems": "onProblem",
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-        },
-        {
-            "label": "",
-            "type": "shell",
+            "problemMatcher": [],
             "command": "${cwd}/bin/theme-scheme",
             "args": [
-                "${input:cmd-func}",
-                "${input:arg}"
-            ]
+                "${input:CMD}",
+                "${input:SUBCMD}",
+                "${input:ARG}"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true,
+                "showReuseMessage": true,
+                "clear": false,
+                "close": false,
+                "group": "Test"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+        }
+    ],
+    "inputs": [
+        {
+            "id": "CMD",
+            "type": "promptString",
+            "description": "Type in a valid command (create, delete, add, remove, list, show, etc)",
+            "default": ""
+        },
+        {
+            "id": "SUBCMD",
+            "type": "promptString",
+            "description": "Type an argument to pass into the cli's test command.",
+            "default": ""
+        },
+        {
+            "id": "ARG",
+            "type": "promptString",
+            "description": "Type an argument to pass into the cli's test command.",
+            "default": ""
         }
     ],
     "options": {
         "cwd": "${workspaceFolder}"
     },
-    "inputs": [
-        {
-            "id": "cmd-func",
-            "description": "Choose one of the CLI's command functions from the list below.",
-            "type": "pickString",
-            "options": [
-                "foo",
-                "bar",
-                "qux",
-                "zuan"
-            ],
-            "default": "Foo"
-        },
-        {
-            "id": "arg",
-            "type": "promptString",
-            "description": "Choose an argument to pass into the command function",
-            "default": "foobar"
-        }
-    ]
 }
